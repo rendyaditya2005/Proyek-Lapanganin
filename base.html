@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sewa Lapangan Olahraga - Jember</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        .filter-btn.active {
+            background-color: #1e40af; /* dark blue */
+            color: white;
+            border-color: #1e40af;
+        }
+        .venue-card {
+            transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        }
+        .venue-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1), 0 4px 6px -4px rgb(0 0 0 / 0.1);
+        }
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-800">
+
+    <!-- Header / Navbar -->
+    <header class="bg-white shadow-md sticky top-0 z-50">
+        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#" class="text-2xl font-bold text-blue-800">
+                <i class="fa-solid fa-futbol mr-2"></i>JemberSport
+            </a>
+            <div class="flex items-center space-x-4">
+                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium">Beranda</a>
+                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium">Tentang</a>
+                <a href="#" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">Masuk</a>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        
+        <!-- Hero Section -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">Temukan & Sewa Lapangan Olahraga</h1>
+            <p class="text-lg text-gray-600">Pilihan venue terbaik di Jember untuk futsal, badminton, basket, dan lainnya.</p>
+        </div>
+
+        <!-- Search and Filter -->
+        <div class="bg-white p-6 rounded-xl shadow-lg mb-8 sticky top-[80px] z-40">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div class="md:col-span-2">
+                    <label for="search-venue" class="font-medium text-gray-700 block mb-2">Cari Nama Venue</label>
+                    <div class="relative">
+                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
+                            <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
+                        </span>
+                        <input type="text" id="search-venue" placeholder="contoh: GOR PKPSO Kaliwates" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                    </div>
+                </div>
+                <div>
+                     <label for="sort-by" class="font-medium text-gray-700 block mb-2">Urutkan</label>
+                     <select id="sort-by" class="w-full py-2 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
+                         <option value="rating">Rating Tertinggi</option>
+                         <option value="price_asc">Harga Terendah</option>
+                         <option value="price_desc">Harga Tertinggi</option>
+                     </select>
+                </div>
+            </div>
+             <div class="mt-4">
+                <p class="font-medium text-gray-700 mb-2">Filter berdasarkan Olahraga</p>
+                <div id="filter-container" class="flex flex-wrap gap-2">
+                     <!-- Filter buttons will be dynamically inserted here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Venue Listings -->
+        <div id="venue-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <!-- Venue cards will be dynamically inserted here -->
+        </div>
+        <div id="no-results" class="hidden text-center py-16">
+            <i class="fa-solid fa-face-sad-tear text-6xl text-gray-400 mb-4"></i>
+            <h3 class="text-2xl font-semibold text-gray-700">Venue tidak ditemukan</h3>
+            <p class="text-gray-500 mt-2">Coba ubah kata kunci pencarian atau filter Anda.</p>
+        </div>
+
+    </main>
+    
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white mt-12">
+        <div class="container mx-auto px-6 py-8 text-center">
+            <p class="font-semibold text-lg">&copy; 2025 JemberSport. Dibuat dengan <i class="fa-solid fa-heart text-red-500"></i> di Jember.</p>
+            <div class="mt-4 flex justify-center space-x-6">
+                <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook-f"></i></a>
+                <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
+                <a href="#" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // --- DATA VENUE (MOCKUP) ---
+        // In a real application, this data would come from a server/database.
+        const venues = [
+            {
+                id: 1,
+                name: 'GOR PKPSO Kaliwates',
+                location: 'Kaliwates, Jember',
+                sports: ['Badminton', 'Basket', 'Voli'],
+                price: 75000,
+                rating: 4.8,
+                imageUrl: 'https://placehold.co/600x400/3b82f6/ffffff?text=GOR+PKPSO'
+            },
+            {
+                id: 2,
+                name: 'Lapangan Futsal Gebang',
+                location: 'Gebang, Jember',
+                sports: ['Futsal'],
+                price: 120000,
+                rating: 4.5,
+                imageUrl: 'https://placehold.co/600x400/16a34a/ffffff?text=Futsal+Gebang'
+            },
+            {
+                id: 3,
+                name: 'Mumbul Garden Badminton Hall',
+                location: 'Mumbulsari, Jember',
+                sports: ['Badminton'],
+                price: 50000,
+                rating: 4.7,
+                imageUrl: 'https://placehold.co/600x400/f97316/ffffff?text=Mumbul+Garden'
+            },
+            {
+                id: 4,
+                name: 'King Futsal Sumbersari',
+                location: 'Sumbersari, Jember',
+                sports: ['Futsal'],
+                price: 150000,
+                rating: 4.9,
+                imageUrl: 'https://placehold.co/600x400/ef4444/ffffff?text=King+Futsal'
+            },
+            {
+                id: 5,
+                name: 'Stadion Jember Sport Garden (JSG)',
+                location: 'Ajung, Jember',
+                sports: ['Sepak Bola'],
+                price: 500000,
+                rating: 4.6,
+                imageUrl: 'https://placehold.co/600x400/8b5cf6/ffffff?text=JSG'
+            },
+            {
+                id: 6,
+                name: 'Lapangan Tenis GOR Argopuro',
+                location: 'Sumbersari, Jember',
+                sports: ['Tenis'],
+                price: 60000,
+                rating: 4.4,
+                imageUrl: 'https://placehold.co/600x400/ec4899/ffffff?text=Tenis+Argopuro'
+            },
+            {
+                id: 7,
+                name: 'Golden Futsal Patrang',
+                location: 'Patrang, Jember',
+                sports: ['Futsal'],
+                price: 135000,
+                rating: 4.6,
+                imageUrl: 'https://placehold.co/600x400/14b8a6/ffffff?text=Golden+Futsal'
+            },
+            {
+                id: 8,
+                name: 'New Campus Badminton Court',
+                location: 'Lingkungan Kampus, Jember',
+                sports: ['Badminton'],
+                price: 45000,
+                rating: 4.3,
+                imageUrl: 'https://placehold.co/600x400/65a30d/ffffff?text=New+Campus'
+            }
+        ];
+
+        const venueList = document.getElementById('venue-list');
+        const searchInput = document.getElementById('search-venue');
+        const filterContainer = document.getElementById('filter-container');
+        const sortSelect = document.getElementById('sort-by');
+        const noResultsDiv = document.getElementById('no-results');
+
+        let currentFilter = 'Semua';
+
+        // --- RENDER FUNCTIONS ---
+
+        function renderVenues(venuesToRender) {
+            venueList.innerHTML = '';
+            if(venuesToRender.length === 0) {
+                noResultsDiv.classList.remove('hidden');
+            } else {
+                 noResultsDiv.classList.add('hidden');
+            }
+            
+            venuesToRender.forEach(venue => {
+                const venueCard = document.createElement('div');
+                venueCard.className = 'bg-white rounded-xl overflow-hidden shadow-md venue-card';
+                
+                const sportsTags = venue.sports.map(sport => `<span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${sport}</span>`).join('');
+
+                venueCard.innerHTML = `
+                    <div class="relative">
+                        <img class="w-full h-48 object-cover" src="${venue.imageUrl}" alt="[Gambar ${venue.name}]">
+                        <div class="absolute top-2 right-2 bg-white px-3 py-1 rounded-full shadow-md flex items-center">
+                            <i class="fa-solid fa-star text-yellow-400 mr-1"></i>
+                            <span class="font-bold text-gray-800">${venue.rating}</span>
+                        </div>
+                    </div>
+                    <div class="p-4">
+                        <h3 class="text-xl font-bold text-gray-900 truncate">${venue.name}</h3>
+                        <p class="text-gray-500 text-sm mt-1 mb-3 flex items-center">
+                            <i class="fa-solid fa-location-dot mr-2"></i>${venue.location}
+                        </p>
+                        <div class="mb-4">
+                            ${sportsTags}
+                        </div>
+                        <div class="flex justify-between items-center">
+                            <p class="text-lg font-bold text-blue-700">Rp ${venue.price.toLocaleString('id-ID')}<span class="text-sm font-normal text-gray-600">/jam</span></p>
+                            <button class="bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">Booking</button>
+                        </div>
+                    </div>
+                `;
+                venueList.appendChild(venueCard);
+            });
+        }
+
+        function renderFilterButtons() {
+            const sports = ['Semua', ...new Set(venues.flatMap(v => v.sports))];
+            filterContainer.innerHTML = sports.map(sport => 
+                `<button class="filter-btn border-2 border-gray-300 text-gray-700 font-medium px-4 py-1 rounded-full hover:bg-blue-100 hover:border-blue-500 transition-colors ${sport === 'Semua' ? 'active' : ''}" data-sport="${sport}">${sport}</button>`
+            ).join('');
+
+            document.querySelectorAll('.filter-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    document.querySelector('.filter-btn.active').classList.remove('active');
+                    this.classList.add('active');
+                    currentFilter = this.dataset.sport;
+                    filterAndRender();
+                });
+            });
+        }
+
+        // --- FILTER AND SORT LOGIC ---
+
+        function filterAndRender() {
+            let filteredVenues = [...venues];
+
+            // Filter by sport
+            if (currentFilter !== 'Semua') {
+                filteredVenues = filteredVenues.filter(venue => venue.sports.includes(currentFilter));
+            }
+
+            // Filter by search term
+            const searchTerm = searchInput.value.toLowerCase();
+            if (searchTerm) {
+                filteredVenues = filteredVenues.filter(venue => venue.name.toLowerCase().includes(searchTerm) || venue.location.toLowerCase().includes(searchTerm));
+            }
+
+            // Sort results
+            const sortBy = sortSelect.value;
+            if(sortBy === 'rating') {
+                filteredVenues.sort((a, b) => b.rating - a.rating);
+            } else if (sortBy === 'price_asc') {
+                filteredVenues.sort((a, b) => a.price - b.price);
+            } else if (sortBy === 'price_desc') {
+                filteredVenues.sort((a, b) => b.price - a.price);
+            }
+
+            renderVenues(filteredVenues);
+        }
+        
+        // --- EVENT LISTENERS ---
+        searchInput.addEventListener('keyup', filterAndRender);
+        sortSelect.addEventListener('change', filterAndRender);
+
+        // --- INITIAL RENDER ---
+        renderFilterButtons();
+        filterAndRender(); // Initial render with default sort by rating
+    });
+    </script>
+
+</body>
+</html>
