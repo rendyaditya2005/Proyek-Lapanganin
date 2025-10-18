@@ -42,55 +42,80 @@
 <body class="bg-gray-50 text-gray-800">
 
     <!-- Header / Navbar -->
-    <header class="bg-white shadow-md sticky top-0 z-50">
-        <nav class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <a href="#" class="text-2xl font-bold text-blue-800">
-                <i class="fa-solid fa-futbol mr-2"></i>JemberSport
+    <header class="bg-white shadow-sm sticky top-0 z-50">
+        <nav class="container mx-auto px-4.5 py-2.5 flex items-center justify-between">
+            <a href="#" class="text-2xl font-bold text-gray-900">
+                <i class="fa-solid fa-futbol mr-2 text-[#2f5d4d]"></i>JemberSport
             </a>
-            <div class="flex items-center space-x-4">
-                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium">Beranda</a>
-                <a href="#" class="text-gray-600 hover:text-blue-700 font-medium">Tentang</a>
-                <a href="#" class="bg-blue-700 text-white px-4 py-2 rounded-lg hover:bg-blue-800 transition-colors">Masuk</a>
-            </div>
-        </nav>
-    </header>
+                <ul class="hidden md:flex items-center gap-8 text-gray-700">
+                <li><a class="hover:text-[#2f5d4d] font-medium" href="#">Sewa Lapangan</a></li>
+                <li><a class="hover:text-[#2f5d4d]" href="#">Partner With Us</a></li>
+                <li><a class="hover:text-[#2f5d4d]" href="#">Venue</a></li>
+            </ul>
+                <div class="flex items-center gap-3">
+                    <a href="#" class="text-gray-700 hover:text-[#2f5d4d]">Masuk</a>
+                    <a href="#" class="bg-[#2f5d4d] text-white px-5 py-2 rounded-full hover:bg-[#3b6b5a] transition-colors">Daftar</a>
+                </div>
+            </nav>
+        </header>
+
 
     <!-- Main Content -->
     <main class="container mx-auto px-6 py-8">
         
         <!-- Hero Section -->
-        <div class="text-center mb-12">
-            <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 mb-3">Temukan & Sewa Lapangan Olahraga</h1>
-            <p class="text-lg text-gray-600">Pilihan venue terbaik di Jember untuk futsal, badminton, basket, dan lainnya.</p>
-        </div>
+        <section
+            class="text-center text-[#f2f0e6]"
+            style="
+                background:
+                radial-gradient(1200px 400px at 50% -200px, rgba(255,255,255,0.06), transparent 70%),
+                url('data:image/svg+xml,%3Csvg width=1440 height=400 xmlns=%22http://www.w3.org/2000/svg%22%3E%3Cpath d=%27M0,320 C240,260 420,380 720,280 C1020,180 1200,340 1440,260%27 stroke=%27rgba(255,255,255,0.08)%27 fill=%27none%27 stroke-width=%2740%27/%3E%3C/svg%3E') center/cover no-repeat,
+                #2f5d4d;">
+            <div class="container mx-auto px-6 py-16">
+                <h1 class="text-4xl md:text-5xl font-extrabold mb-3">Temukan & Sewa Lapangan Olahraga</h1>
+                <p class="text-lg opacity-90">Pilihan venue terbaik di Jember untuk futsal, badminton, basket, dan lainnya.</p>
+            </div>
+        </section>
 
-        <!-- Search and Filter -->
-        <div class="bg-white p-6 rounded-xl shadow-lg mb-8 sticky top-[80px] z-40">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-                <div class="md:col-span-2">
-                    <label for="search-venue" class="font-medium text-gray-700 block mb-2">Cari Nama Venue</label>
-                    <div class="relative">
-                        <span class="absolute inset-y-0 left-0 flex items-center pl-3">
-                            <i class="fa-solid fa-magnifying-glass text-gray-400"></i>
-                        </span>
-                        <input type="text" id="search-venue" placeholder="contoh: GOR PKPSO Kaliwates" class="w-full pl-10 pr-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                    </div>
-                </div>
-                <div>
-                     <label for="sort-by" class="font-medium text-gray-700 block mb-2">Urutkan</label>
-                     <select id="sort-by" class="w-full py-2 px-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition">
-                         <option value="rating">Rating Tertinggi</option>
-                         <option value="price_asc">Harga Terendah</option>
-                         <option value="price_desc">Harga Tertinggi</option>
-                     </select>
-                </div>
+                <!-- Search capsule baru -->
+<!-- Search capsule -->
+            <div class="w-full flex justify-center -mt-8 mb-8">
+            <div class="w-full max-w-5xl bg-white rounded-2xl shadow-md border border-gray-200 p-3 md:p-4">
+                <div class="grid grid-cols-1 md:grid-cols-[1fr_1fr_1fr_auto] gap-2 items-center">
+
+
+            <!-- Pilih Kecamatan -->
+            <label class="flex items-center gap-3 border rounded-full px-4 py-2.5">
+                <i class="fa-solid fa-location-dot text-gray-500"></i>
+                <select id="district-select" class="w-full bg-transparent outline-none">
+                <option value="Semua">Pilih Kecamatan</option>
+                </select>
+            </label>
+
+            <!-- Pilih Kategori Olahraga -->
+            <label class="flex items-center gap-3 border rounded-full px-4 py-2.5">
+                <i class="fa-solid fa-table-cells-large text-gray-500"></i>
+                <select id="sport-select" class="w-full bg-transparent outline-none">
+                <option value="Semua">Pilih Kategori Olahraga</option>
+                </select>
+            </label>
+
+            <!-- Urutkan -->
+            <label class="flex items-center gap-3 border rounded-full px-4 py-2.5">
+                <i class="fa-solid fa-sliders text-gray-500"></i>
+                <select id="sort-by" class="w-full bg-transparent outline-none">
+                <option value="rating">Urutkan Berdasarkan</option>
+                <option value="price_asc">Harga Terendah</option>
+                <option value="price_desc">Harga Tertinggi</option>
+                </select>
+            </label>
+
+            <!-- Tombol Cari -->
+            <button id="search-btn" class="bg-[#2f5d4d] text-white px-6 py-3 rounded-full font-semibold hover:bg-[#3b6b5a]">
+                Cari Venue
+            </button>
             </div>
-             <div class="mt-4">
-                <p class="font-medium text-gray-700 mb-2">Filter berdasarkan Olahraga</p>
-                <div id="filter-container" class="flex flex-wrap gap-2">
-                     <!-- Filter buttons will be dynamically inserted here -->
-                </div>
-            </div>
+        </div>
         </div>
 
         <!-- Venue Listings -->
@@ -105,202 +130,118 @@
 
     </main>
     
-    <!-- Footer -->
-    <footer class="bg-gray-800 text-white mt-12">
-        <div class="container mx-auto px-6 py-8 text-center">
-            <p class="font-semibold text-lg">&copy; 2025 JemberSport. Dibuat dengan <i class="fa-solid fa-heart text-red-500"></i> di Jember.</p>
-            <div class="mt-4 flex justify-center space-x-6">
-                <a href="#" class="hover:text-blue-400"><i class="fab fa-facebook-f"></i></a>
-                <a href="#" class="hover:text-blue-400"><i class="fab fa-instagram"></i></a>
-                <a href="#" class="hover:text-blue-400"><i class="fab fa-twitter"></i></a>
-            </div>
-        </div>
-    </footer>
 
-
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
+        <script>
+        document.addEventListener('DOMContentLoaded', function () {
         // --- DATA VENUE (MOCKUP) ---
-        // In a real application, this data would come from a server/database.
         const venues = [
-            {
-                id: 1,
-                name: 'GOR PKPSO Kaliwates',
-                location: 'Kaliwates, Jember',
-                sports: ['Badminton', 'Basket', 'Voli'],
-                price: 75000,
-                rating: 4.8,
-                imageUrl: 'https://placehold.co/600x400/3b82f6/ffffff?text=GOR+PKPSO'
-            },
-            {
-                id: 2,
-                name: 'Lapangan Futsal Gebang',
-                location: 'Gebang, Jember',
-                sports: ['Futsal'],
-                price: 120000,
-                rating: 4.5,
-                imageUrl: 'https://placehold.co/600x400/16a34a/ffffff?text=Futsal+Gebang'
-            },
-            {
-                id: 3,
-                name: 'Mumbul Garden Badminton Hall',
-                location: 'Mumbulsari, Jember',
-                sports: ['Badminton'],
-                price: 50000,
-                rating: 4.7,
-                imageUrl: 'https://placehold.co/600x400/f97316/ffffff?text=Mumbul+Garden'
-            },
-            {
-                id: 4,
-                name: 'King Futsal Sumbersari',
-                location: 'Sumbersari, Jember',
-                sports: ['Futsal'],
-                price: 150000,
-                rating: 4.9,
-                imageUrl: 'https://placehold.co/600x400/ef4444/ffffff?text=King+Futsal'
-            },
-            {
-                id: 5,
-                name: 'Stadion Jember Sport Garden (JSG)',
-                location: 'Ajung, Jember',
-                sports: ['Sepak Bola'],
-                price: 500000,
-                rating: 4.6,
-                imageUrl: 'https://placehold.co/600x400/8b5cf6/ffffff?text=JSG'
-            },
-            {
-                id: 6,
-                name: 'Lapangan Tenis GOR Argopuro',
-                location: 'Sumbersari, Jember',
-                sports: ['Tenis'],
-                price: 60000,
-                rating: 4.4,
-                imageUrl: 'https://placehold.co/600x400/ec4899/ffffff?text=Tenis+Argopuro'
-            },
-            {
-                id: 7,
-                name: 'Golden Futsal Patrang',
-                location: 'Patrang, Jember',
-                sports: ['Futsal'],
-                price: 135000,
-                rating: 4.6,
-                imageUrl: 'https://placehold.co/600x400/14b8a6/ffffff?text=Golden+Futsal'
-            },
-            {
-                id: 8,
-                name: 'New Campus Badminton Court',
-                location: 'Lingkungan Kampus, Jember',
-                sports: ['Badminton'],
-                price: 45000,
-                rating: 4.3,
-                imageUrl: 'https://placehold.co/600x400/65a30d/ffffff?text=New+Campus'
-            }
+            { id: 1, name: 'GOR PKPSO Kaliwates', location: 'Kaliwates, Jember', sports: ['Badminton','Basket','Voli'], price: 75000, rating: 4.8, imageUrl: 'https://placehold.co/600x400/3b82f6/ffffff?text=GOR+PKPSO' },
+            { id: 2, name: 'Lapangan Futsal Gebang', location: 'Gebang, Jember', sports: ['Futsal'], price: 120000, rating: 4.5, imageUrl: 'https://placehold.co/600x400/16a34a/ffffff?text=Futsal+Gebang' },
+            { id: 3, name: 'Mumbul Garden Badminton Hall', location: 'Mumbulsari, Jember', sports: ['Badminton'], price: 50000, rating: 4.7, imageUrl: 'https://placehold.co/600x400/f97316/ffffff?text=Mumbul+Garden' },
+            { id: 4, name: 'King Futsal Sumbersari', location: 'Sumbersari, Jember', sports: ['Futsal'], price: 150000, rating: 4.9, imageUrl: 'https://placehold.co/600x400/ef4444/ffffff?text=King+Futsal' },
+            { id: 5, name: 'Stadion Jember Sport Garden (JSG)', location: 'Ajung, Jember', sports: ['Sepak Bola'], price: 500000, rating: 4.6, imageUrl: 'https://placehold.co/600x400/8b5cf6/ffffff?text=JSG' },
+            { id: 6, name: 'Lapangan Tenis GOR Argopuro', location: 'Sumbersari, Jember', sports: ['Tenis'], price: 60000, rating: 4.4, imageUrl: 'https://placehold.co/600x400/ec4899/ffffff?text=Tenis+Argopuro' },
+            { id: 7, name: 'Golden Futsal Patrang', location: 'Patrang, Jember', sports: ['Futsal'], price: 135000, rating: 4.6, imageUrl: 'https://placehold.co/600x400/14b8a6/ffffff?text=Golden+Futsal' },
+            { id: 8, name: 'New Campus Badminton Court', location: 'Lingkungan Kampus, Jember', sports: ['Badminton'], price: 45000, rating: 4.3, imageUrl: 'https://placehold.co/600x400/65a30d/ffffff?text=New+Campus' }
         ];
 
-        const venueList = document.getElementById('venue-list');
-        const searchInput = document.getElementById('search-venue');
-        const filterContainer = document.getElementById('filter-container');
-        const sortSelect = document.getElementById('sort-by');
-        const noResultsDiv = document.getElementById('no-results');
+        // --- DOM refs (hanya yang dipakai) ---
+        const sortSelect     = document.getElementById('sort-by');
+        const districtSelect = document.getElementById('district-select');
+        const sportSelect    = document.getElementById('sport-select');
+        const searchBtn      = document.getElementById('search-btn');
 
-        let currentFilter = 'Semua';
+        // --- State ---
+        let currentDistrict = 'Semua';
+        let currentSport    = 'Semua';
 
-        // --- RENDER FUNCTIONS ---
+        // --- Render kartu venue ---
+        function renderVenues(list) {
+            const el = document.getElementById('venue-list');
+            const empty = document.getElementById('no-results');
+            el.innerHTML = '';
 
-        function renderVenues(venuesToRender) {
-            venueList.innerHTML = '';
-            if(venuesToRender.length === 0) {
-                noResultsDiv.classList.remove('hidden');
-            } else {
-                 noResultsDiv.classList.add('hidden');
+            if (!list.length) {
+            empty.classList.remove('hidden');
+            return;
             }
-            
-            venuesToRender.forEach(venue => {
-                const venueCard = document.createElement('div');
-                venueCard.className = 'bg-white rounded-xl overflow-hidden shadow-md venue-card';
-                
-                const sportsTags = venue.sports.map(sport => `<span class="bg-blue-100 text-blue-800 text-xs font-semibold mr-2 px-2.5 py-0.5 rounded-full">${sport}</span>`).join('');
+            empty.classList.add('hidden');
 
-                venueCard.innerHTML = `
-                    <div class="relative">
-                        <img class="w-full h-48 object-cover" src="${venue.imageUrl}" alt="[Gambar ${venue.name}]">
-                        <div class="absolute top-2 right-2 bg-white px-3 py-1 rounded-full shadow-md flex items-center">
-                            <i class="fa-solid fa-star text-yellow-400 mr-1"></i>
-                            <span class="font-bold text-gray-800">${venue.rating}</span>
-                        </div>
-                    </div>
-                    <div class="p-4">
-                        <h3 class="text-xl font-bold text-gray-900 truncate">${venue.name}</h3>
-                        <p class="text-gray-500 text-sm mt-1 mb-3 flex items-center">
-                            <i class="fa-solid fa-location-dot mr-2"></i>${venue.location}
-                        </p>
-                        <div class="mb-4">
-                            ${sportsTags}
-                        </div>
-                        <div class="flex justify-between items-center">
-                            <p class="text-lg font-bold text-blue-700">Rp ${venue.price.toLocaleString('id-ID')}<span class="text-sm font-normal text-gray-600">/jam</span></p>
-                            <button class="bg-blue-700 text-white px-4 py-2 rounded-lg font-semibold hover:bg-blue-800 transition-colors">Booking</button>
-                        </div>
-                    </div>
-                `;
-                venueList.appendChild(venueCard);
+            list.forEach((v) => {
+            const firstSport = v.sports[0] || '';
+            const card = document.createElement('article');
+            card.className = 'bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100 venue-card';
+            card.innerHTML = `
+                <div class="relative">
+                <img class="w-full h-44 object-cover" src="${v.imageUrl}" alt="${v.name}">
+                </div>
+                <div class="p-4">
+                <span class="text-xs text-gray-500">Venue</span>
+                <h3 class="text-lg md:text-xl font-semibold text-gray-900 mt-0.5">${v.name}</h3>
+                <div class="mt-1 flex items-center gap-2 text-sm text-gray-600">
+                    <i class="fa-solid fa-star text-amber-400"></i>
+                    <span class="font-medium">${v.rating.toFixed(2)}</span>
+                    <span class="text-gray-400">•</span>
+                    <i class="fa-solid fa-location-dot"></i>
+                    <span>${v.location}</span>
+                </div>
+                <div class="mt-2 text-sm text-gray-600">
+                    <i class="fa-solid fa-table-tennis-paddle-ball mr-1"></i>${firstSport}
+                </div>
+                <div class="mt-4 text-sm">
+                    <span class="text-gray-500">Mulai </span>
+                    <span class="font-semibold text-gray-900">Rp${v.price.toLocaleString('id-ID')}</span>
+                    <span class="text-gray-500">/sesi</span>
+                </div>
+                </div>
+            `;
+            el.appendChild(card);
             });
         }
 
-        function renderFilterButtons() {
+        // --- Isi opsi dropdown ---
+        function populateFilters() {
+            const districts = ['Semua', ...new Set(venues.map(v => (v.location.split(',')[0] || '').trim()))];
+            districtSelect.innerHTML = districts
+            .map(d => `<option value="${d}">${d === 'Semua' ? 'Pilih Kecamatan' : d}</option>`)
+            .join('');
+
             const sports = ['Semua', ...new Set(venues.flatMap(v => v.sports))];
-            filterContainer.innerHTML = sports.map(sport => 
-                `<button class="filter-btn border-2 border-gray-300 text-gray-700 font-medium px-4 py-1 rounded-full hover:bg-blue-100 hover:border-blue-500 transition-colors ${sport === 'Semua' ? 'active' : ''}" data-sport="${sport}">${sport}</button>`
-            ).join('');
-
-            document.querySelectorAll('.filter-btn').forEach(button => {
-                button.addEventListener('click', function() {
-                    document.querySelector('.filter-btn.active').classList.remove('active');
-                    this.classList.add('active');
-                    currentFilter = this.dataset.sport;
-                    filterAndRender();
-                });
-            });
+            sportSelect.innerHTML = sports
+            .map(s => `<option value="${s}">${s === 'Semua' ? 'Pilih Kategori Olahraga' : s}</option>`)
+            .join('');
         }
 
-        // --- FILTER AND SORT LOGIC ---
-
+        // --- Filter + sort + render ---
         function filterAndRender() {
-            let filteredVenues = [...venues];
+            let f = [...venues];
 
-            // Filter by sport
-            if (currentFilter !== 'Semua') {
-                filteredVenues = filteredVenues.filter(venue => venue.sports.includes(currentFilter));
+            if (currentDistrict !== 'Semua') {
+            f = f.filter(v => (v.location.split(',')[0] || '').trim() === currentDistrict);
+            }
+            if (currentSport !== 'Semua') {
+            f = f.filter(v => v.sports.includes(currentSport));
             }
 
-            // Filter by search term
-            const searchTerm = searchInput.value.toLowerCase();
-            if (searchTerm) {
-                filteredVenues = filteredVenues.filter(venue => venue.name.toLowerCase().includes(searchTerm) || venue.location.toLowerCase().includes(searchTerm));
-            }
+            const s = sortSelect.value;
+            if (s === 'rating') f.sort((a, b) => b.rating - a.rating);
+            else if (s === 'price_asc') f.sort((a, b) => a.price - b.price);
+            else if (s === 'price_desc') f.sort((a, b) => b.price - a.price);
 
-            // Sort results
-            const sortBy = sortSelect.value;
-            if(sortBy === 'rating') {
-                filteredVenues.sort((a, b) => b.rating - a.rating);
-            } else if (sortBy === 'price_asc') {
-                filteredVenues.sort((a, b) => a.price - b.price);
-            } else if (sortBy === 'price_desc') {
-                filteredVenues.sort((a, b) => b.price - a.price);
-            }
-
-            renderVenues(filteredVenues);
+            renderVenues(f);
         }
-        
-        // --- EVENT LISTENERS ---
-        searchInput.addEventListener('keyup', filterAndRender);
-        sortSelect.addEventListener('change', filterAndRender);
 
-        // --- INITIAL RENDER ---
-        renderFilterButtons();
-        filterAndRender(); // Initial render with default sort by rating
-    });
-    </script>
+        // --- Events ---
+        districtSelect.addEventListener('change', e => { currentDistrict = e.target.value; });
+        sportSelect.addEventListener('change',    e => { currentSport    = e.target.value; });
+        sortSelect.addEventListener('change', filterAndRender);
+        searchBtn.addEventListener('click',  filterAndRender);
+
+        // --- Init ---
+        populateFilters();
+        filterAndRender();
+        });
+        </script>
 
 </body>
 </html>
