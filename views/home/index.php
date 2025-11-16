@@ -16,38 +16,62 @@ ob_start();
   </div>
 </section>
 
-<section class="max-w-6xl mx-auto px-4 py-10 grid gap-6 md:grid-cols-3">
-  <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
-    <img src="/assets/img/card-padel-1.jpg" class="w-full h-44 object-cover" alt="">
-    <div class="p-4 text-sm">
-      <p class="text-gray-500">Venue</p>
-      <h3 class="font-semibold text-lg">Padel Co.</h3>
-      <p class="text-gray-500 mt-1">⭐ 4.12 • Kota Bandung</p>
-      <p class="mt-3 text-gray-500 line-through text-xs">Rp260.000</p>
-      <p class="font-semibold">Mulai Rp250.000 <span class="text-gray-400 text-xs">/sesi</span></p>
-    </div>
-  </article>
+<section class="max-w-6xl mx-auto px-4 py-10">
+  <a href="<?= $base ?>/venue/zona-futsal" class="block">
+  <div class="mt-10 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
+        <img src="/assets/img/futsal2.jpg" class="w-full h-44 object-cover" alt="">
+        <div class="p-4 text-sm">
+          <p class="text-gray-500">Venue</p>
+          <h3 class="font-semibold text-lg">Zona Futsal</h3>
+          <p class="text-gray-500 mt-1">⭐ 4.00 • Jember</p>
+          <p class="font-semibold mt-2">
+            Mulai Rp30.000 <span class="text-gray-700 text-xs">/sesi</span></p>
+        </div>
+      </article>
+  </a>
 
-  <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
-    <img src="/assets/img/card-padel-2.jpg" class="w-full h-44 object-cover" alt="">
-    <div class="p-4 text-sm">
-      <p class="text-gray-500">Venue</p>
-      <h3 class="font-semibold text-lg">Papadelulu Padel Club</h3>
-      <p class="text-gray-500 mt-1">⭐ 4.87 • Kota Bandung</p>
-      <p class="font-semibold mt-2">Mulai Rp250.000 <span class="text-gray-400 text-xs">/sesi</span></p>
-    </div>
-  </article>
+    <a href="<?= $base ?>/venue/lapangan8" class="block">
+    <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
+      <img src="/assets/img/badminton.jpg" class="w-full h-44 object-cover" alt="">
+      <div class="p-4 text-sm">
+        <p class="text-gray-500">Venue</p>
+        <h3 class="font-semibold text-lg">Lapangan 8</h3>
+        <p class="text-gray-500 mt-1">⭐ 4.5 • Jember</p>
+        <p class="font-semibold mt-2">
+          Mulai Rp35.000 <span class="text-gray-700 text-xs">/sesi</span></p>
+      </div>
+    </article>
+  </a>
 
-  <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
-    <img src="/assets/img/card-padel-3.jpg" class="w-full h-44 object-cover" alt="">
-    <div class="p-4 text-sm">
-      <p class="text-gray-500">Venue</p>
-      <h3 class="font-semibold text-lg">Joglo Padel Club</h3>
-      <p class="text-gray-500 mt-1">⭐ 4.98 • Kota Yogyakarta</p>
-      <p class="text-gray-500 line-through text-xs mt-3">Rp360.000</p>
-      <p class="font-semibold">Mulai Rp150.000 <span class="text-gray-400 text-xs">/sesi</span></p>
-    </div>
-  </article>
+  <a href="<?= $base ?>/venue/king-futsal" class="block">
+    <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
+      <img src="/assets/img/futsal.jpg" class="w-full h-44 object-cover" alt="">
+      <div class="p-4 text-sm">
+        <p class="text-gray-500">Venue</p>
+        <h3 class="font-semibold text-lg">King Futsal</h3>
+        <p class="text-gray-500 mt-1">⭐ 5.00 • Jember</p>
+        <p class="font-semibold mt-2">
+          Mulai Rp30.000 <span class="text-gray-700 text-xs">/sesi</span>
+        </p>
+      </div>
+    </article>
+  </a>
+
+    <a href="<?= $base ?>/venue/rush-badminton" class="block">
+      <article class="bg-white rounded-2xl border shadow-sm overflow-hidden">
+      <img src="/assets/img/rush.jpg" class="w-full h-44 object-cover" alt="">
+      <div class="p-4 text-sm">
+        <p class="text-gray-500">Venue</p>
+        <h3 class="font-semibold text-lg">Rush Badminton</h3>
+        <p class="text-gray-500 mt-1">⭐ 5.00 • Jember</p>
+        <p class="font-semibold mt-2">
+          Mulai Rp35.000 <span class="text-gray-700 text-xs">/sesi</span>
+        </p>
+      </div>
+    </article>
+    </a>
+  </div>
 </section>
 <?php
 $content = ob_get_clean();

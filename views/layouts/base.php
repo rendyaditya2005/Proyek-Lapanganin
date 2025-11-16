@@ -19,7 +19,7 @@ $isLogin = isset($_SESSION['user']);
   <header class="bg-white/90 backdrop-blur sticky top-0 z-50 border-b">
     <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
       <a href="<?= $base ?>/" class="flex items-center gap-2">
-        <img src="/assets/img/logo-lapanganin.png" alt="Lapanganin" class="w-10 h-10 object-contain">
+        <img src="/assets/img/logo-lapanganin.png" alt="Lapanganin" class="w-16 h-16 object-contain">
         <span class="font-semibold text-lg">Lapanganin</span>
       </a>
 
@@ -33,8 +33,10 @@ $isLogin = isset($_SESSION['user']);
       <?php if ($isLogin): ?>
         <div class="relative">
           <button id="userBtn" class="flex items-center gap-2 border rounded-full px-3 py-1.5 hover:bg-gray-50">
-            <img src="<?= htmlspecialchars($_SESSION['user']['avatar'] ?? '/assets/img/logo-lapanganin.png') ?>" class="h-6 w-6 rounded-full" alt="avatar">
-            <span class="hidden sm:inline text-sm"><?= htmlspecialchars($_SESSION['user']['name'] ?? 'User') ?></span>
+            <div class="flex items-center space-x-2">
+              <i class="fa-solid fa-user-circle text-2xl text-gray-700"></i>
+              <span class="hidden sm:inline text-sm"><?= htmlspecialchars($_SESSION['user']['name'] ?? 'User') ?></span>
+            </div>
             <i class="fa-solid fa-chevron-down text-xs"></i>
           </button>
 
@@ -65,10 +67,6 @@ $isLogin = isset($_SESSION['user']);
   <main class="max-w-7xl mx-auto px-4 py-6">
     <?= $content ?? '' ?>
   </main>
-
-  <footer class="border-t bg-white text-center py-6 text-gray-600 text-sm">
-    © <?= date('Y') ?> Lapanganin
-  </footer>
 
   <script>window.BASE_PATH = <?= json_encode($base) ?>;</script>
   <script src="<?= $base ?>/js/home.js?v=1" defer></script>

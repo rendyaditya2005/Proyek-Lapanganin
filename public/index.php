@@ -46,6 +46,27 @@ switch ($path) {
     if ($pwd!==$cfm){ header('Location: /register?error=pwd_mismatch'); exit; }
     header('Location: /login?success=1'); exit;
 
+  case '/venue/rush-badminton':
+    require __DIR__.'/../views/venue/rush-badminton.php';
+    break;
+
+  case '/venue/zona-futsal':
+    require __DIR__.'/../views/venue/zona-futsal.php';
+    break;
+
+  case '/venue/lapangan8':
+    require __DIR__.'/../views/venue/lapangan8.php';
+    break;
+
+  case '/venue/king-futsal':
+    require __DIR__.'/../views/venue/king-futsal.php';
+    break;
+
+  case '/profile':
+    require __DIR__.'/../views/profile/index.php';
+    break;
+
+
   case '/__ping':
     echo 'OK'; break;
 
