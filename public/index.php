@@ -70,6 +70,34 @@ switch ($path) {
   case '/__ping':
     echo 'OK'; break;
 
+  case '/partner':
+case '/partner/':
+    $title = 'Partner With Us - Lapanganin';
+    require __DIR__ . '/../views/partner/index.php';
+    break;
+
+case '/venue':
+case '/venue/':
+    require __DIR__ . '/../views/venue/index.php';
+    break;
+
+case '/venue/zona-futsal':
+case '/venue/zona-futsal/':
+    require __DIR__ . '/../views/venue/zona-futsal.php';
+    break;
+
+case '/jadwal':
+case '/jadwal/':
+    $title = 'Jadwal Saya - Lapanganin';
+    require __DIR__ . '/../views/jadwal/index.php';
+    break;
+
+case '/booking/checkout':
+case '/booking/checkout/':
+    $title = 'Pilih Metode Pembayaran - Lapanganin';
+    require __DIR__ . '/../views/booking/checkout.php';
+    break;
+
   default:
     http_response_code(404); echo 'Not Found';
 }
