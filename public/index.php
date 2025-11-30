@@ -22,19 +22,38 @@ switch ($path) {
     break;
 
   case '/auth/do-login':
-    if ($_SERVER['REQUEST_METHOD']!=='POST'){ http_response_code(405); exit('Method Not Allowed'); }
+    if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
+      http_response_code(405);
+      exit('Method Not Allowed');
+    }
+
     $email = $_POST['email'] ?? '';
     $pass  = $_POST['password'] ?? '';
-    // dummy auth
-    if ($email==='admin@gmail.com' && $pass==='12345') {
+
+    if ($email === 'admin@gmail.com' && $pass === 'admin123') {
       $_SESSION['user'] = [
-        'name'  => 'Rendy',
-        'email' => $email,
-        'avatar'=> '/assets/img/logo-lapanganin.png'
+        'name'   => 'Admin',
+        'email'  => $email,
+        'avatar' => '/assets/img/logo-lapanganin.png',
+        'role'   => 'admin'
       ];
-      header('Location: /'); exit;
+      header('Location: ' . $base . '/admin');
+      exit;
     }
-    header('Location: /login?error=1'); exit;
+
+    if ($email === 'rendy@gmail.com' && $pass === '12345') {
+      $_SESSION['user'] = [
+        'name'   => 'Rendy',
+        'email'  => $email,
+        'avatar' => '/assets/img/logo-lapanganin.png',
+        'role'   => 'user'
+      ];
+      header('Location: ' . $base . '/');
+      exit;
+    }
+
+    header('Location: ' . $base . '/login?error=1');
+    exit;
 
   case '/logout':
     session_destroy();
@@ -97,6 +116,28 @@ case '/booking/checkout/':
     $title = 'Pilih Metode Pembayaran - Lapanganin';
     require __DIR__ . '/../views/booking/checkout.php';
     break;
+
+case '/booking/pilih-metode':
+case '/booking/pilih-metode.php':
+  require __DIR__.'/../views/booking/pilih-metode.php';
+  break;
+
+case '/profile/password':
+  require __DIR__.'/../views/profile/password.php';
+  break;
+
+case '/admin':
+case '/admin/index.php':
+  require __DIR__ . '/../views/admin/index.php';
+  break;
+  
+case '/admin/venue/add':
+  require __DIR__ . '/../views/admin/venue-add.php';
+  break;
+
+case '/admin/venue/edit':
+  require __DIR__ . '/../views/admin/venue-edit.php';
+  break;
 
   default:
     http_response_code(404); echo 'Not Found';

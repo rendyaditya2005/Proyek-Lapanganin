@@ -16,53 +16,73 @@ $isLogin = isset($_SESSION['user']);
 </head>
 
 <body class="bg-gray-50 text-gray-800">
-  <header class="bg-white/90 backdrop-blur sticky top-0 z-50 border-b">
-    <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
-      <a href="<?= $base ?>/" class="flex items-center gap-2">
-        <img src="/assets/img/logo-lapanganin.png" alt="Lapanganin" class="w-16 h-16 object-contain">
-        <span class="font-semibold text-lg">Lapanganin</span>
+<!-- NAVBAR -->
+<header class="bg-white/90 backdrop-blur sticky top-0 z-50 border-b">
+  <nav class="container mx-auto px-4 py-3 flex items-center justify-between">
+    
+    <?php
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $isLogin = isset($_SESSION['user']);
+    ?>
+
+    <!-- LOGO -->
+    <a href="<?= $base ?>/" class="flex items-center gap-2">
+      <img src="<?= $base ?>/assets/img/logo-lapanganin.png" class="w-16 h-16 object-contain">
+      <span class="font-semibold text-lg">Lapanganin</span>
+    </a>
+
+    <!-- MENU -->
+    <div class="hidden sm:flex items-center gap-8 text-sm">
+      <a href="<?= $base ?>/" class="relative hover:text-emerald-700">
+        Sewa Lapangan
+        <?php if ($path === '/' || $path === ''): ?>
+          <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-8 h-0.5 bg-emerald-700 rounded-full"></span>
+        <?php endif; ?>
       </a>
 
-      <ul class="hidden md:flex items-center gap-8 text-gray-700 text-sm">
-        <li><a href="<?= $base ?>/" class="hover:text-[#2f5d4d]">Sewa Lapangan</a></li>
-        <li><a href="<?= $base ?>/partner" class="hover:text-[#2f5d4d]">Partner With Us</a></li>
-        <li><a href="<?= $base ?>/venue" class="hover:text-[#2f5d4d]">Venue</a></li>
-        <li><a href="<?= $base ?>/jadwal" class="hover:text-[#2f5d4d]">Jadwal Saya</a></li>
-      </ul>
+      <a href="<?= $base ?>/partner" class="relative hover:text-emerald-700">
+        Partner With Us
+        <?php if (str_starts_with($path, '/partner')): ?>
+          <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-8 h-0.5 bg-emerald-700 rounded-full"></span>
+        <?php endif; ?>
+      </a>
 
-      <?php if ($isLogin): ?>
-        <div class="relative">
-          <button id="userBtn" class="flex items-center gap-2 border rounded-full px-3 py-1.5 hover:bg-gray-50">
-            <div class="flex items-center space-x-2">
-              <i class="fa-solid fa-user-circle text-2xl text-gray-700"></i>
-              <span class="hidden sm:inline text-sm"><?= htmlspecialchars($_SESSION['user']['name'] ?? 'User') ?></span>
-            </div>
-            <i class="fa-solid fa-chevron-down text-xs"></i>
-          </button>
+      <a href="<?= $base ?>/venue" class="relative hover:text-emerald-700">
+        Venue
+        <?php if (str_starts_with($path, '/venue')): ?>
+          <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-8 h-0.5 bg-emerald-700 rounded-full"></span>
+        <?php endif; ?>
+      </a>
 
-          <div id="userMenu" class="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg border hidden">
-            <a href="<?= $base ?>/profile" class="block px-4 py-2 text-sm hover:bg-gray-50">Profil</a>
-            <a href="<?= $base ?>/dashboard" class="block px-4 py-2 text-sm hover:bg-gray-50">Dashboard</a>
-            <a href="<?= $base ?>/logout" class="block px-4 py-2 text-sm text-red-600 hover:bg-red-50">Keluar</a>
-          </div>
-        </div>
+      <a href="<?= $base ?>/jadwal" class="relative hover:text-emerald-700">
+        Jadwal Saya
+        <?php if (str_starts_with($path, '/jadwal')): ?>
+          <span class="absolute left-1/2 -translate-x-1/2 -bottom-0.5 w-8 h-0.5 bg-emerald-700 rounded-full"></span>
+        <?php endif; ?>
+      </a>
+    </div>
 
-        <script>
-          const btn = document.getElementById('userBtn');
-          const menu = document.getElementById('userMenu');
-          btn?.addEventListener('click', () => menu.classList.toggle('hidden'));
-          document.addEventListener('click', e => {
-            if (!btn.contains(e.target) && !menu.contains(e.target)) menu.classList.add('hidden');
-          });
-        </script>
-      <?php else: ?>
-        <div class="flex items-center gap-3">
-          <a href="<?= $base ?>/login" class="text-sm text-gray-700 hover:text-[#2f5d4d]">Masuk</a>
-          <a href="<?= $base ?>/register" class="text-sm bg-[#2f5d4d] text-white px-4 py-2 rounded-lg">Daftar</a>
-        </div>
-      <?php endif; ?>
-    </nav>
-  </header>
+    <!-- RIGHT MENU -->
+    <?php if ($isLogin): ?>
+      <a href="<?= $base ?>/profile"
+         class="w-12 h-12 rounded-full border flex items-center justify-center hover:bg-gray-100">
+        <i class="fa-regular fa-user text-sm"></i>
+      </a>
+    <?php else: ?>
+      <div class="flex items-center gap-3">
+        <a href="<?= $base ?>/login" class="text-sm hover:text-emerald-700">
+          Masuk
+        </a>
+        <a href="<?= $base ?>/register"
+           class="text-sm bg-emerald-700 text-white px-4 py-2 rounded-lg hover:bg-emerald-800">
+          Daftar
+        </a>
+      </div>
+    <?php endif; ?>
+
+  </nav>
+</header>
 
   <main class="max-w-7xl mx-auto px-4 py-6">
     <?= $content ?? '' ?>

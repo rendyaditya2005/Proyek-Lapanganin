@@ -1,5 +1,5 @@
 <?php
-$title = 'Profil Pengguna - Lapanganin';
+$title = 'Ubah Password - Lapanganin';
 ob_start();
 
 $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
@@ -27,27 +27,24 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
         <div class="w-full space-y-4 text-sm">
 
-          <!-- Informasi Pengguna -->
-          <a href="<?= $base ?>/profile"
+            <a href="<?= $base ?>/profile"
             class="w-full flex items-center gap-3 rounded-full px-5 py-3 font-semibold transition
             <?= $currentPath === '/profile'
-              ? 'bg-[#244734] text-white'
-              : 'bg-white text-[#244734] hover:bg-white/90' ?>">
+                ? 'bg-[#244734] text-white'
+                : 'bg-white text-[#244734] hover:bg-white/90' ?>">
             <i class="fa-regular fa-user"></i>
             <span>Informasi Pengguna</span>
-          </a>
+            </a>
 
-          <!-- Password -->
-          <a href="<?= $base ?>/profile/password"
+            <a href="<?= $base ?>/profile/password"
             class="w-full flex items-center gap-3 rounded-full px-5 py-3 font-semibold transition
             <?= $currentPath === '/profile/password'
-              ? 'bg-[#244734] text-white'
-              : 'bg-white text-[#244734] hover:bg-white/90' ?>">
+                ? 'bg-[#244734] text-white'
+                : 'bg-white text-[#244734] hover:bg-white/90' ?>">
             <i class="fa-solid fa-lock"></i>
             <span>Password</span>
-          </a>
+            </a>
 
-          <!-- Logout -->
             <button type="button"
                     onclick="openLogoutModal()"
                     class="w-full flex items-center gap-3 bg-white text-[#244734] rounded-full px-5 py-3 font-semibold">
@@ -59,44 +56,40 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
       </div>
     </aside>
 
-    <!-- KONTEN UTAMA -->
+    <!-- KONTEN UBAH PASSWORD -->
     <section class="flex-1">
       <div class="bg-[#244734] text-white rounded-[40px] p-8 md:p-10">
-        <h1 class="text-2xl md:text-3xl font-semibold mb-8">Informasi Pengguna</h1>
+        <h1 class="text-2xl md:text-3xl font-semibold mb-8">Ubah Password</h1>
 
-        <form class="space-y-6">
-
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-sm mb-2">First Name</label>
-              <input type="text"
-                     class="w-full rounded-full px-5 py-3 text-sm text-gray-900 bg-white outline-none">
-            </div>
-            <div>
-              <label class="block text-sm mb-2">Last Name</label>
-              <input type="text"
-                     class="w-full rounded-full px-5 py-3 text-sm text-gray-900 bg-white outline-none">
-            </div>
-          </div>
+        <form action="<?= $base ?>/profile/password-update.php" method="post" class="space-y-6">
 
           <div>
-            <label class="block text-sm mb-2">Email</label>
-            <input type="email"
+            <label class="block text-sm mb-2">Password Saat Ini</label>
+            <input type="password" name="current_password" required
                    class="w-full rounded-full px-5 py-3 text-sm text-gray-900 bg-white outline-none">
           </div>
 
           <div>
-            <label class="block text-sm mb-2">No Telephone</label>
-            <input type="text"
+            <label class="block text-sm mb-2">Password Baru</label>
+            <input type="password" name="new_password" required minlength="8"
+                   class="w-full rounded-full px-5 py-3 text-sm text-gray-900 bg-white outline-none">
+            <p class="text-xs text-gray-200/80 mt-1">
+              Minimal 8 karakter, disarankan kombinasi huruf dan angka.
+            </p>
+          </div>
+
+          <div>
+            <label class="block text-sm mb-2">Konfirmasi Password Baru</label>
+            <input type="password" name="new_password_confirmation" required
                    class="w-full rounded-full px-5 py-3 text-sm text-gray-900 bg-white outline-none">
           </div>
 
           <div class="flex justify-end gap-4 pt-6">
-            <button type="reset"
-                    class="rounded-full px-8 py-3 bg-white text-[#244734] font-semibold">
+            <a href="<?= $base ?>/profile"
+               class="rounded-full px-8 py-3 bg-white text-[#244734] font-semibold">
               Batal
-            </button>
-            <button type="button"
+            </a>
+            <button type="submit"
                     class="rounded-full px-8 py-3 bg-white text-[#244734] font-semibold">
               Simpan
             </button>
@@ -109,16 +102,19 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
   </div>
 </section>
 
+<!-- LOGOUT MODAL -->
 <div id="logoutModal"
      class="fixed inset-0 z-[999] hidden items-center justify-center bg-black/40">
 
   <div class="bg-white rounded-2xl p-6 w-full max-w-sm text-center">
-    <h2 class="text-lg font-semibold mb-2">Konfirmasi Logout</h2>
+    <h2 class="text-lg font-semibold text-gray-900 mb-2">
+      Konfirmasi Logout
+    </h2>
     <p class="text-sm text-gray-600 mb-6">
       Kamu yakin ingin keluar dari akun?
     </p>
 
-    <div class="flex justify-center gap-3">
+    <div class="flex gap-3 justify-center">
       <button onclick="closeLogoutModal()"
               class="px-5 py-2 rounded-full bg-gray-200 text-gray-800 text-sm font-medium">
         Batal
@@ -126,7 +122,7 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
       <form action="<?= $base ?>/logout" method="post">
         <button type="submit"
-                class="px-5 py-2 rounded-full bg-green-900 text-white text-sm font-medium">
+                class="px-5 py-2 rounded-full bg-red-600 text-white text-sm font-medium">
           Logout
         </button>
       </form>
@@ -136,15 +132,13 @@ $currentPath = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 
 <script>
 function openLogoutModal() {
-  const modal = document.getElementById('logoutModal');
-  modal.classList.remove('hidden');
-  modal.classList.add('flex');
+  document.getElementById('logoutModal').classList.remove('hidden');
+  document.getElementById('logoutModal').classList.add('flex');
 }
 
 function closeLogoutModal() {
-  const modal = document.getElementById('logoutModal');
-  modal.classList.add('hidden');
-  modal.classList.remove('flex');
+  document.getElementById('logoutModal').classList.add('hidden');
+  document.getElementById('logoutModal').classList.remove('flex');
 }
 </script>
 

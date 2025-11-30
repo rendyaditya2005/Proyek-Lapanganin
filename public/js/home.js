@@ -2,79 +2,155 @@ document.addEventListener('DOMContentLoaded', function () {
   try {
     console.log('home.js OK');
 
+    // 1. DATA VENUE KAMU
     const venues = [
-      { id: 1, name: 'GOR PKPSO Kaliwates', location: 'Kaliwates, Jember', sports: ['Badminton','Basket','Voli'], price: 75000, rating: 4.8, imageUrl: 'https://placehold.co/600x400/3b82f6/ffffff?text=GOR+PKPSO' },
-      { id: 2, name: 'Lapangan Futsal Gebang', location: 'Gebang, Jember', sports: ['Futsal'], price: 120000, rating: 4.5, imageUrl: 'https://placehold.co/600x400/16a34a/ffffff?text=Futsal+Gebang' },
-      { id: 3, name: 'Mumbul Garden Badminton Hall', location: 'Mumbulsari, Jember', sports: ['Badminton'], price: 50000, rating: 4.7, imageUrl: 'https://placehold.co/600x400/f97316/ffffff?text=Mumbul+Garden' }
+      {
+        id: 1,
+        name: 'Zona Futsal',
+        location: 'Kaliwates, Jember',
+        district: 'Kaliwates',
+        sports: ['Futsal'],
+        price: 30000,
+        rating: 4.0,
+        imageUrl: '/assets/img/futsal2.jpg',
+        url: BASE_PATH + '/venue/zona-futsal'
+      },
+      {
+        id: 2,
+        name: 'Lapangan 8',
+        location: 'Sumbersari, Jember',
+        district: 'Sumbersari',
+        sports: ['Badminton'],
+        price: 35000,
+        rating: 4.5,
+        imageUrl: '/assets/img/badminton.jpg',
+        url: BASE_PATH + '/venue/lapangan8'
+      },
+      {
+        id: 3,
+        name: 'King Futsal',
+        location: 'Kaliwates, Jember',
+        district: 'Kaliwates',
+        sports: ['Futsal'],
+        price: 30000,
+        rating: 5.0,
+        imageUrl: '/assets/img/futsal.jpg',
+        url: BASE_PATH + '/venue/king-futsal'
+      },
+      {
+        id: 4,
+        name: 'Rush Badminton',
+        location: 'Sumbersari, Jember',
+        district: 'Sumbersari',
+        sports: ['Badminton'],
+        price: 35000,
+        rating: 5.0,
+        imageUrl: '/assets/img/rush.jpg',
+        url: BASE_PATH + '/venue/rush-badminton'
+      }
     ];
 
-    const sortSelect     = document.getElementById('sort-by');
-    const districtSelect = document.getElementById('district-select');
-    const sportSelect    = document.getElementById('sport-select');
-    const searchBtn      = document.getElementById('search-btn');
+    // 2. AMBIL ELEMEN FILTER
+    const sortSelect     = document.getElementById('sort-by');          // Urutkan Berdasarkan
+    const districtSelect = document.getElementById('district-select');  // Pilih Kecamatan
+    const sportSelect    = document.getElementById('sport-select');     // Pilih Kategori Olahraga
+    const searchBtn      = document.getElementById('search-btn');       // Tombol Cari Venue
     const venueList      = document.getElementById('venue-list');
     const noResults      = document.getElementById('no-results');
 
-    if (!venueList) { console.error('#venue-list tidak ditemukan'); return; }
+    if (!venueList) {
+      console.error('#venue-list tidak ditemukan');
+      return;
+    }
 
+    // 3. RENDER KARTU VENUE
     function renderVenues(list) {
       venueList.innerHTML = '';
+
       if (!list.length) {
-        noResults && noResults.classList.remove('hidden');
+        if (noResults) noResults.classList.remove('hidden');
         return;
       }
-      noResults && noResults.classList.add('hidden');
+      if (noResults) noResults.classList.add('hidden');
 
       list.forEach(v => {
         const firstSport = v.sports[0] || '';
-        const el = document.createElement('article');
-        el.className = 'bg-white rounded-2xl overflow-hidden shadow-md border border-gray-100';
-        el.innerHTML = `
-          <div class="relative">
+        const wrapper = document.createElement('div');
+        wrapper.className = 'venue-card bg-white rounded-2xl border shadow-sm overflow-hidden';
+
+        wrapper.innerHTML = `
+          <a href="${v.url}" class="block">
             <img class="w-full h-44 object-cover" src="${v.imageUrl}" alt="${v.name}" loading="lazy">
-          </div>
-          <div class="p-4">
-            <span class="text-xs text-gray-500">Venue</span>
-            <h3 class="text-lg md:text-xl font-semibold text-gray-900 mt-0.5">${v.name}</h3>
-            <div class="mt-1 flex items-center gap-2 text-sm text-gray-600">
-              <i class="fa-solid fa-star"></i>
-              <span class="font-medium">${v.rating.toFixed(2)}</span>
-              <span class="text-gray-400">•</span>
-              <i class="fa-solid fa-location-dot"></i>
-              <span>${v.location}</span>
+            <div class="p-4 text-sm">
+              <p class="text-gray-500">Venue</p>
+              <h3 class="font-semibold text-lg text-gray-900">${v.name}</h3>
+              <p class="text-gray-500 mt-1">
+                ⭐ ${v.rating.toFixed(2)} • ${v.location}
+              </p>
+              <p class="mt-1 text-gray-600">${firstSport}</p>
+              <p class="font-semibold mt-2">
+                Mulai Rp${v.price.toLocaleString('id-ID')}
+                <span class="text-gray-700 text-xs">/sesi</span>
+              </p>
             </div>
-            <div class="mt-2 text-sm text-gray-600">${firstSport}</div>
-            <div class="mt-4 text-sm">
-              <span class="text-gray-500">Mulai </span>
-              <span class="font-semibold text-gray-900">Rp${v.price.toLocaleString('id-ID')}</span>
-              <span class="text-gray-500">/sesi</span>
-            </div>
-          </div>`;
-        venueList.appendChild(el);
+          </a>
+        `;
+
+        venueList.appendChild(wrapper);
       });
     }
 
+    // 4. ISI DROPDOWN DARI DATA
     function populateFilters() {
       if (!districtSelect || !sportSelect) return;
-      const districts = ['Semua', ...new Set(venues.map(v => (v.location.split(',')[0] || '').trim()))];
-      districtSelect.innerHTML = districts.map(d => `<option value="${d}">${d === 'Semua' ? 'Pilih Kecamatan' : d}</option>`).join('');
-      const sports = ['Semua', ...new Set(venues.flatMap(v => v.sports))];
-      sportSelect.innerHTML = sports.map(s => `<option value="${s}">${s === 'Semua' ? 'Pilih Kategori Olahraga' : s}</option>`).join('');
+
+      const districts = [''].concat(
+        [...new Set(venues.map(v => v.district))]
+      );
+      districtSelect.innerHTML = districts
+        .map(d => `<option value="${d}">${d === '' ? 'Pilih Kecamatan' : d}</option>`)
+        .join('');
+
+      const sports = [''].concat(
+        [...new Set(venues.flatMap(v => v.sports))]
+      );
+      sportSelect.innerHTML = sports
+        .map(s => `<option value="${s}">${s === '' ? 'Pilih Kategori Olahraga' : s}</option>`)
+        .join('');
     }
 
+    // 5. FILTER + SORT
     function filterAndRender() {
-      let f = [...venues];
-      // tambahkan filter kalau perlu
-      renderVenues(f);
+      let list = [...venues];
+
+      const selectedDistrict = districtSelect ? districtSelect.value : '';
+      const selectedSport    = sportSelect ? sportSelect.value : '';
+      const selectedSort     = sortSelect ? sortSelect.value : '';
+
+      if (selectedDistrict) {
+        list = list.filter(v => v.district === selectedDistrict);
+      }
+
+      if (selectedSport) {
+        list = list.filter(v => v.sports.includes(selectedSport));
+      }
+
+      if (selectedSort === 'name_asc') {
+        list.sort((a, b) => a.name.localeCompare(b.name));
+      } else if (selectedSort === 'name_desc') {
+        list.sort((a, b) => b.name.localeCompare(a.name));
+      }
+
+      renderVenues(list);
     }
 
     populateFilters();
     filterAndRender();
 
-    sortSelect    && sortSelect.addEventListener('change', filterAndRender);
-    districtSelect&& districtSelect.addEventListener('change', filterAndRender);
-    sportSelect   && sportSelect.addEventListener('change', filterAndRender);
-    searchBtn     && searchBtn.addEventListener('click',  filterAndRender);
+    sortSelect     && sortSelect.addEventListener('change', filterAndRender);
+    districtSelect && districtSelect.addEventListener('change', filterAndRender);
+    sportSelect    && sportSelect.addEventListener('change', filterAndRender);
+    searchBtn      && searchBtn.addEventListener('click', filterAndRender);
 
   } catch (e) {
     console.error('Init error:', e);

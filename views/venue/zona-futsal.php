@@ -82,7 +82,7 @@ ob_start();
 
               <?php
               // contoh slot yang sudah dibooking
-              $bookedSlots = ['10:00', '15:00'];
+              $bookedSlots = [];
 
               for ($i = 9; $i <= 22; $i++):
                   $s = sprintf("%02d:00", $i);

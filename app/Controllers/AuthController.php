@@ -17,7 +17,7 @@ class AuthController {
     $password = $_POST['password'] ?? '';
 
     // Login dummy: jika email dan password cocok, arahkan ke "dashboard"
-    if ($email === 'admin@gmail.com' && $password === '12345') {
+    if ($email === 'rendy@gmail.com' && $password === '12345') {
       header('Location: /dashboard');
       exit;
     } else {

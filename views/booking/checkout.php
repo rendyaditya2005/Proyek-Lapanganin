@@ -82,13 +82,10 @@ ob_start();
       </div>
 
       <!-- tombol bawah -->
-      <div class="flex flex-col sm:flex-row gap-3">
-        <button
-          type="button"
-          class="w-full sm:w-auto px-5 py-2.5 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-100"
-        >
+        <a href="<?= $base ?>/booking/pilih-metode"
+          class="px-6 py-3 rounded-full border border-gray-300 text-sm font-medium text-gray-700 hover:bg-gray-50">
           Ganti Metode
-        </button>
+        </a>
 
         <button
           type="button"
